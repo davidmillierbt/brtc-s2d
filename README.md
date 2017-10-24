@@ -15,6 +15,11 @@ Click the button below to deploy from the portal:
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
+A different option:
+<a href="https://azuredeploy.net/" target="_blank">
+    <img src="https://azuredeploy.net/deploybutton.png"/>
+</a>
+
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fdavidmillierbt%2Fbrtc-s2d%2Fdev%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
