@@ -134,6 +134,7 @@
         "witnessStorageName": "[concat(parameters('namePrefix'),'filecw',uniqueString(resourceGroup().id))]",
         "witnessStorageType": "Standard_LRS",
         "resourceNamePrefix": "[concat(parameters('namePrefix'),'-file-')]",
+		"vmComputerNamePrefix": "[concat(parameters('namePrefix'),'file')]",
         "vmAvailabilitySetName": "[concat(variables('resourceNamePrefix'),'as')]",
         "clusterName": "[concat(variables('resourceNamePrefix'),'c')]",
         "vmLoopTemplateURL": "[concat(parameters('_artifactsLocation'),'/nestedtemplates/newVM.json',parameters('_artifactsLocationSasToken'))]",
@@ -212,7 +213,7 @@
                         "value": "[concat(variables('resourceNamePrefix'), copyindex())]"
                     },
                     "vmComputerName": {
-                        "value": "[concat(parameters('namePrefix'),'file', copyindex())]"
+                        "value": "[concat(variables('vmComputerNamePrefix'), copyindex())]"
                     },					
                     "vmAvailabilitySetName": {
                         "value": "[variables('vmAvailabilitySetName')]"
@@ -320,7 +321,7 @@
                         "clusterName": "[variables('clusterName')]",
                         "sofsName": "[parameters('sofsName')]",
                         "shareName": "[parameters('shareName')]",
-                        "resourceNamePrefix": "[variables('resourceNamePrefix')]",
+                        "vmComputerNamePrefix": "[variables('vmComputerNamePrefix')]",
                         "vmCount": "[parameters('vmCount')]",
                         "vmDiskSize": "[parameters('vmDiskSize')]",
 						"vmDiskType": "[parameters('vmDiskType')]",
