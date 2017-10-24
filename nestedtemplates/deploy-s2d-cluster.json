@@ -131,11 +131,11 @@
     },
     "variables": {
         "apiVersionStorage": "2016-01-01",
-        "witnessStorageName": "[concat(parameters('namePrefix'),'cw',uniqueString(resourceGroup().id))]",
+        "witnessStorageName": "[concat(parameters('namePrefix'),'filecw',uniqueString(resourceGroup().id))]",
         "witnessStorageType": "Standard_LRS",
-        "vmNamePrefix": "[concat(parameters('namePrefix'),'-')]",
-        "vmAvailabilitySetName": "[concat(variables('vmNamePrefix'),'as')]",
-        "clusterName": "[concat(variables('vmNamePrefix'),'c')]",
+        "resourceNamePrefix": "[concat(parameters('namePrefix'),'-file-')]",
+        "vmAvailabilitySetName": "[concat(variables('resourceNamePrefix'),'as')]",
+        "clusterName": "[concat(variables('resourceNamePrefix'),'c')]",
         "vmLoopTemplateURL": "[concat(parameters('_artifactsLocation'),'/nestedtemplates/newVM.json',parameters('_artifactsLocationSasToken'))]",
         "s2dPrepModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/preps2d.ps1.zip',parameters('_artifactsLocationSasToken'))]",
         "s2dPrepFunction": "PrepS2D.ps1\\PrepS2D",
@@ -168,7 +168,7 @@
         },
         {
             "type": "Microsoft.Network/networkInterfaces",
-			"name": "[concat(variables('vmNamePrefix'), copyindex(), '-nic')]",
+			"name": "[concat(variables('resourceNamePrefix'), copyindex(), '-nic')]",
             "location": "[resourceGroup().location]",
             "apiVersion": "2017-03-01",
             "copy": {
@@ -197,7 +197,7 @@
                 "name": "virtualMachineLoop",
                 "count": "[parameters('vmCount')]"
             },
-            "name": "[concat(variables('vmNamePrefix'),copyindex(),'-newVM')]",
+            "name": "[concat(variables('resourceNamePrefix'),copyindex(),'-newVM')]",
             "dependsOn": [
                 "nicLoop",
                 "[resourceId('Microsoft.Compute/availabilitySets', variables('vmAvailabilitySetName'))]"
@@ -209,8 +209,11 @@
                 },
                 "parameters": {
                     "vmName": {
-                        "value": "[concat(variables('vmNamePrefix'), copyindex())]"
+                        "value": "[concat(variables('resourceNamePrefix'), copyindex())]"
                     },
+                    "vmComputerName": {
+                        "value": "[concat(parameters('namePrefix'),'file', copyindex())]"
+                    },					
                     "vmAvailabilitySetName": {
                         "value": "[variables('vmAvailabilitySetName')]"
                     },
@@ -261,7 +264,7 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(variables('vmNamePrefix'),copyindex(1),'/s2dPrep')]",
+            "name": "[concat(variables('resourceNamePrefix'),copyindex(1),'/s2dPrep')]",
             "apiVersion": "2017-03-30",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -296,7 +299,7 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(variables('vmNamePrefix'),'0/s2dConfig')]",
+            "name": "[concat(variables('resourceNamePrefix'),'0/s2dConfig')]",
             "apiVersion": "2017-03-30",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -317,7 +320,7 @@
                         "clusterName": "[variables('clusterName')]",
                         "sofsName": "[parameters('sofsName')]",
                         "shareName": "[parameters('shareName')]",
-                        "vmNamePrefix": "[variables('vmNamePrefix')]",
+                        "resourceNamePrefix": "[variables('resourceNamePrefix')]",
                         "vmCount": "[parameters('vmCount')]",
                         "vmDiskSize": "[parameters('vmDiskSize')]",
 						"vmDiskType": "[parameters('vmDiskType')]",
