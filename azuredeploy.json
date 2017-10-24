@@ -18,8 +18,12 @@
       "defaultValue": "Standard_B2s"
     },
     "enableAcceleratedNetworking": {
-      "type": "bool",
-	  "defaultValue": "false",
+	  "type": "bool",
+	  "defaultValue": false,
+	  "allowedValues": [
+		true,
+		false
+	  ],
       "metadata": {
         "description": "Enable (true) or Disable (false) Accelerated Networking - if enabling, make sure you are selecting appropriate VM Size and Region"
       }
