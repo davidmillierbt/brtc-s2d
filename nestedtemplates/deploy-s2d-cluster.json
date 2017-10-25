@@ -138,9 +138,9 @@
         "vmAvailabilitySetName": "[concat(variables('resourceNamePrefix'),'as')]",
         "clusterName": "[concat(variables('resourceNamePrefix'),'c')]",
         "vmLoopTemplateURL": "[concat(parameters('_artifactsLocation'),'/nestedtemplates/newVM.json',parameters('_artifactsLocationSasToken'))]",
-        "s2dPrepModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/preps2d.ps1.zip',parameters('_artifactsLocationSasToken'))]",
+        "s2dPrepModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/preps2d20171024070800.ps1.zip',parameters('_artifactsLocationSasToken'))]",
         "s2dPrepFunction": "PrepS2D.ps1\\PrepS2D",
-        "s2dConfigModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/configs2d.ps1.zip',parameters('_artifactsLocationSasToken'))]",
+        "s2dConfigModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/configs2d20171024070800.ps1.zip',parameters('_artifactsLocationSasToken'))]",
         "s2dConfigFunction": "ConfigS2D.ps1\\ConfigS2D"
     },
     "resources": [
